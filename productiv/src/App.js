@@ -4,6 +4,9 @@ import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
+
+//HERE IS A NEW COMMENT
+
 const INITIAL_TODOS = [
   {
     id: 1,
