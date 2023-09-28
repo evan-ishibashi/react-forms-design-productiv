@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 import TopTodo from "./TopTodo";
+import TodoForm from "./TodoForm";
+
 import EditableTodoList from "./EditableTodoList";
 
 /** App for managing a todo list.
@@ -15,18 +17,29 @@ import EditableTodoList from "./EditableTodoList";
  * App -> TodoApp -> { TodoForm, EditableTodoList }
  */
 
-function TodoApp() {
+function TodoApp({ initialTodos }) {
+
+  const [todos, setTodos] = useState[initialTodos];
+  //todos will be like:
+  //[{title: 'Code!', description: 'Write some code', priority: 1}];
 
   /** add a new todo to list */
   function create(newTodo) {
+
   }
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
+    setTodos(prevTodos => {
+      return prevTodos.map(todo => {
+        return (todo.id === updatedTodo.id) ? updatedTodo : todo;
+      })
+    })
   }
 
   /** delete a todo by id */
   function remove(id) {
+
   }
 
   return (
@@ -47,7 +60,7 @@ function TodoApp() {
 
             <section>
               <h3 className="mb-3">Add Nü</h3>
-              FIXME
+              <TodoForm handleSave={handleSave}>
             </section>
           </div>
 
