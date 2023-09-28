@@ -21,15 +21,12 @@ import EditableTodoList from "./EditableTodoList";
 
 function TodoApp({ initialTodos }) {
 
-
   const [todos, setTodos] = useState(initialTodos);
 
   /** add a new todo to list */
   function create(newTodo) {
     setTodos(oldTodos => {
-      const unique = uuid();
-      //uuid rename^
-      return [...oldTodos, { ...newTodo, id: unique }];
+      return [...oldTodos, { ...newTodo, id: uuid(), complete: false }];
     });
   }
 

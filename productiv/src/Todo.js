@@ -8,10 +8,31 @@ import React from "react";
  * { EditableTodo, TopTodo } -> Todo
  **/
 
-function Todo({ id, title, description, priority }) {
+function Todo({ id, title, description, priority, complete, update }) {
+
+  function handleClick(){
+    const newTodo = {
+      id,
+      title,
+      description,
+      priority,
+      complete : !complete
+    }
+    update(newTodo);
+  }
+
   return (
     <div className="Todo">
-      <div><b>{title}</b> <small>(priority: {priority})</small></div>
+      <div>
+        <div onClick={handleClick} >
+          {complete ?
+            <s><b>{title}</b></s> :
+            <b>{title}</b>
+          }
+        </div>
+
+        <small>(priority: {priority})</small>
+      </div>
       <div><small>{description}</small></div>
     </div>
   );

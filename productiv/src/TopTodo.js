@@ -11,8 +11,10 @@ import Todo from "./Todo";
 
 function TopTodo({ todos }) {
   // lowest-priority # is the highest priority
+
+  ////TODO: figure out logic. Refactor: todos.filter(...).reduce(...)
   let topTodo = todos.reduce((acc, cur) => {
-    return cur.priority < acc.priority ? cur : acc;
+    return cur.priority < acc.priority && !cur.complete ? cur : acc;
   }, todos[0]);
 
   return <Todo
