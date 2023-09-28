@@ -1,11 +1,13 @@
 import React from "react";
 import TodoApp from "./TodoApp";
 import Footer from "./Footer";
+import Quote from "./Quote";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
 
 //HERE IS A NEW COMMENT
+
 
 
 const INITIAL_TODOS = [
@@ -43,6 +45,7 @@ function App() {
         <div className="container">
           <h1>Prøductïv</h1>
           <p className="lead">The best name in todo list management.</p>
+          <Quote />
         </div>
       </header>
 
