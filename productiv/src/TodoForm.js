@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-
+const BLANK_FORM_DATA = {
+  title: "",
+  description: "",
+  priority: 1
+};
 /** Form for adding.
  *
  * Props:
@@ -11,11 +15,12 @@ import React, { useState } from "react";
  */
 //{initialFormData, handleSave}
 
-function TodoForm({ initialFormData, handleSave }) {
+function TodoForm({ initialFormData = BLANK_FORM_DATA, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
 
   /** Update form input. */
+  // Think about validating datatype for priority
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData(oldFormData => {

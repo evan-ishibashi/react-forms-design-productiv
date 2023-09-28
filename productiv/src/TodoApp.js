@@ -7,12 +7,6 @@ import TodoForm from "./TodoForm";
 import EditableTodoList from "./EditableTodoList";
 
 
-const BLANK_FORM_DATA = {
-  title: "",
-  description: "",
-  id: null,
-  priority: 1
-};
 
 /** App for managing a todo list.
  *
@@ -34,7 +28,8 @@ function TodoApp({ initialTodos }) {
   function create(newTodo) {
     setTodos(oldTodos => {
       const unique = uuid();
-      return [...oldTodos, { ...newTodo, id: unique, key: unique }];
+      //uuid rename^
+      return [...oldTodos, { ...newTodo, id: unique }];
     });
   }
 
@@ -49,34 +44,32 @@ function TodoApp({ initialTodos }) {
 
   /** delete a todo by id */
   function remove(id) {
-    setTodos(oldTodos => {
-      return oldTodos.filter(todo => todo.id !== id);
-    });
+    setTodos(oldTodos => oldTodos.filter(todo => todo.id !== id));
   }
+
 
   return (
     <main className="TodoApp">
       <div className="row">
 
         <div className="col-md-6">
-          {todos.length > 0 &&
-            <EditableTodoList todos={todos} update={update} remove={remove} />}
-          {todos.length === 0 &&
-            <span className="text-muted">You have no todos.</span>
-          }
+          {todos.length > 0 ?
+            <EditableTodoList todos={todos} update={update} remove={remove} /> :
+            <span className="text-muted">You have no todos.</span>}
         </div>
 
         <div className="col-md-6">
-          {todos.length > 0 &&
-            <section className="mb-4">
-              <h3>Top Todo</h3>
-              <TopTodo todos={todos} />
-            </section>
-          }
+
+          <section className="mb-4">
+            <h3>Top Todo</h3>
+            {todos.length > 0 ? <TopTodo todos={todos} /> :
+              <span className="text-muted">You have no todos.</span>}
+          </section>
+
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
-            <TodoForm initialFormData={BLANK_FORM_DATA} handleSave={create} />
+            <TodoForm handleSave={create} />
           </section>
         </div>
 

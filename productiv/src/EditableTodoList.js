@@ -13,17 +13,12 @@ import EditableTodo from "./EditableTodo";
 
 function EditableTodoList({ todos, update, remove }) {
 
-  // Maps through list of todos to make editable todo components
-  function makeEditableTodos() {
-    return todos.map(todo => {
-      return <EditableTodo key={todo.id} todo={todo} update={update} remove={remove} />;
-    });
-  }
-
   return (
     <div className="EditableTodoList">
-      {makeEditableTodos()}
-    </div>
+      {todos.map(todo => {
+        return <EditableTodo key={todo.id} todo={todo} update={update} remove={remove} />;
+      })}
+      </div>
   );
 }
 

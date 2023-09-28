@@ -18,7 +18,7 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    setIsEditing(prev => !prev);
+    setIsEditing(edit => !edit);
   }
 
   /** Call remove fn passed to this. */
@@ -28,7 +28,7 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    update(formData);
+    update({id:todo.id, ...formData});
     setIsEditing(false);
   }
 
