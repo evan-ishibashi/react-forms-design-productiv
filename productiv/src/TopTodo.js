@@ -9,7 +9,7 @@ import Todo from "./Todo";
  * TodoApp -> TopTodo
  */
 
-function TopTodo({todos}) {
+function TopTodo({ todos }) {
   // lowest-priority # is the highest priority
   let topTodo = todos.reduce((acc, cur) => {
     return cur.priority < acc.priority ? cur : acc;

@@ -11,10 +11,7 @@ import React, { useState } from "react";
  */
 //{initialFormData, handleSave}
 
-function TodoForm({initialFormData, handleSave}) {
-  // console.log('props is', props);
-  console.log('initialFormData', initialFormData);
-  console.log('handleSave is: ', handleSave);
+function TodoForm({ initialFormData, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
 

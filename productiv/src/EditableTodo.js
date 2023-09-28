@@ -13,7 +13,7 @@ import TodoForm from "./TodoForm";
  */
 
 function EditableTodo({ todo, update, remove }) {
-  // console.log('in EditableTodo, todo is: ', todo);
+
   const [isEditing, setIsEditing] = useState(false);
 
   /** Toggle if this is being edited */
@@ -34,7 +34,7 @@ function EditableTodo({ todo, update, remove }) {
 
   return (
     <div className="EditableTodo">
-      {isEditing && <TodoForm initialFormData={todo} handleSave={handleSave}/>}
+      {isEditing && <TodoForm initialFormData={todo} handleSave={handleSave} />}
 
       {!isEditing &&
         <div className="mb-3">

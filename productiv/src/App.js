@@ -4,10 +4,6 @@ import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
-/** Site application.
- *
- * App -> TodoApp
- **/
 const INITIAL_TODOS = [
   {
     id: 1,
@@ -28,6 +24,10 @@ const INITIAL_TODOS = [
     priority: 3,
   },
 ];
+/** Site application.
+ *
+ * App -> TodoApp
+ **/
 
 function App() {
   return (
