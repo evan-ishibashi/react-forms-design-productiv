@@ -13,6 +13,7 @@ import TodoForm from "./TodoForm";
  */
 
 function EditableTodo({ todo, update, remove }) {
+  // console.log('in EditableTodo, todo is: ', todo);
   const [isEditing, setIsEditing] = useState(false);
 
   /** Toggle if this is being edited */
@@ -49,7 +50,7 @@ function EditableTodo({ todo, update, remove }) {
               Del
             </button>
           </div>
-          <Todo />
+          <Todo {...todo} />
         </div>
       }
     </div>

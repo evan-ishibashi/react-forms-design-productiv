@@ -6,6 +6,14 @@ import TodoForm from "./TodoForm";
 
 import EditableTodoList from "./EditableTodoList";
 
+
+const BlankFormData = {
+  title: "",
+  description: "",
+  id: null,
+  priority: 1
+}
+
 /** App for managing a todo list.
  *
  * Props:
@@ -19,7 +27,9 @@ import EditableTodoList from "./EditableTodoList";
 
 function TodoApp({ initialTodos }) {
 
-  const [todos, setTodos] = useState[initialTodos];
+
+  const [todos, setTodos] = useState(initialTodos);
+  console.log(initialTodos);
   //todos will be like:
   //[{title: 'Code!', description: 'Write some code', priority: 1}];
 
@@ -42,7 +52,7 @@ function TodoApp({ initialTodos }) {
   /** delete a todo by id */
   function remove(id) {
     setTodos(oldTodos => {
-    return oldTodos.filter(todo => todo.id !== id);
+      return oldTodos.filter(todo => todo.id !== id);
     });
   }
 
@@ -51,20 +61,24 @@ function TodoApp({ initialTodos }) {
       <div className="row">
 
         <div className="col-md-6">
-          <EditableTodoList todos={todos} update={update} remove={remove} /> OR
-          <span className="text-muted">You have no todos.</span>
+          {todos.length &&
+            <EditableTodoList todos={todos} update={update} remove={remove} />}
+          {todos.length === 0 &&
+            <span className="text-muted">You have no todos.</span>
+          }
         </div>
 
         <div className="col-md-6">
-          (if no top todo, omit this whole section)
+          {todos.length &&
           <section className="mb-4">
             <h3>Top Todo</h3>
-            <TopTodo />
+            <TopTodo todos={todos} />
           </section>
+          }
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
-            <TodoForm handleSave={create} />
+            <TodoForm initialFormData={BlankFormData} handleSave={create} />
           </section>
         </div>
 

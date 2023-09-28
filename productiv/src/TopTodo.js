@@ -1,5 +1,4 @@
 import React from "react";
-
 import Todo from "./Todo";
 
 /** Shows the top todo.
@@ -12,10 +11,15 @@ import Todo from "./Todo";
 
 function TopTodo({todos}) {
   // lowest-priority # is the highest priority
-  // let top = todos.reduce(
-  //     (acc, cur) => cur.priority < acc.priority ? cur : acc, todos[0]);
+  let topTodo = todos.reduce((acc, cur) => {
+    return cur.priority < acc.priority ? cur : acc;
+  }, todos[0]);
 
-  return <Todo  />;
+  return <Todo
+    title={topTodo.title}
+    description={topTodo.description}
+    priority={topTodo.priority}
+  />;
 }
 
 export default TopTodo;

@@ -14,14 +14,14 @@ import EditableTodo from "./EditableTodo";
 function EditableTodoList({todos, update, remove}) {
 
   function makeEditableTodos(){
-    //map function goes here
+    return todos.map(todo => {
+      // console.log('todo in map is: ', todo);
+      return <EditableTodo todo={todo} update={update} remove={remove}/>
+    })
   }
-        // {/*   FIXME  */}
-        // <EditableTodo todo=todo update={update} />
-        // <EditableTodo />
-        // <EditableTodo />
+
   return (
-      <div>
+      <div className="EditableTodoList">
         {makeEditableTodos()}
       </div>
   );

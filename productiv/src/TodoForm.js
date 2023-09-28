@@ -9,8 +9,13 @@ import React, { useState } from "react";
  *
  * { TodoApp, EditableTodo } -> TodoForm
  */
+//{initialFormData, handleSave}
 
-function TodoForm(initialFormData, handleSave) {
+function TodoForm({initialFormData, handleSave}) {
+  // console.log('props is', props);
+  console.log('initialFormData', initialFormData);
+  console.log('handleSave is: ', handleSave);
+
   const [formData, setFormData] = useState(initialFormData);
 
   /** Update form input. */
