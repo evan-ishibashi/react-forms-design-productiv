@@ -39,12 +39,11 @@ describe("Test form functionality", function (){
   })
 
   test("Test if form fields pre-fill properly (for edit form)", function (){
-    const {container, debug, queryByText} = render(<TodoApp initialTodos={TEST_TODOS} />);
-
+    const {container, queryByText, debug} = render(<TodoApp initialTodos={TEST_TODOS} />);
 
     const editButton = container.querySelector(".EditableTodo-toggle")
 
-    fireEvent.click(editButton); //opens up form to edit
+    fireEvent.click(editButton);
 
     const todoForms = container.querySelectorAll(".NewTodoForm");
     expect(todoForms.length).toEqual(2);
@@ -81,9 +80,56 @@ describe("Test form functionality", function (){
     expect(allTodos.length).toEqual(5);
   })
 
-  // test("Test if we can edit an existing Todo", function (){
+  test("Test if we can edit an existing Todo", function (){
+    const {container, queryByText, debug} = render(<TodoApp initialTodos={TEST_TODOS} />);
 
-  // })
+    const editButton = container.querySelector(".EditableTodo-toggle");
+
+    fireEvent.click(editButton);
+
+    const titleField = container.querySelector("#newTodo-title");
+    const descField = container.querySelector("#newTodo-description");
+    const priorityField = container.querySelector("#newTodo-priority");
+
+    // debug(priorityField);
+
+    expect(titleField.getAttribute("value")).toEqual("Test1");
+    expect(descField).toHaveTextContent("Test1 - priority2");
+    expect(priorityField).toHaveValue("2");
+
+    //TODO: below doesn't work. getAttribute value does not seem to reveal stuff
+    //for select items, even though we explicitly set it in react.
+    //expect(priorityField.getAttribute(value)).toEqual(2);
+
+    //This works, but I don't think it can tell us which is the current priority
+    //expect(priorityField).toContainHTML('<option value="1">Ultra-Über</option>');
+
+
+    fireEvent.change(titleField, {target : {value: "Test1 EDITED"}});
+    fireEvent.change(descField, {target : {value: "Test1 - priority1 EDITED"}});
+    fireEvent.change(priorityField, {target : {value: "1"}});
+    //fireEvent for priority needed too, but we cant target value?
+
+    const submitBtn = container.querySelector(".NewTodoForm-addBtn");
+    fireEvent.click(submitBtn);
+
+    expect(titleField.getAttribute("value")).toEqual("Test1 EDITED");
+    expect(descField).toHaveValue("Test1 - priority1 EDITED");
+    expect(priorityField).toHaveValue("1");
+
+
+    // //Check whether TopTodo has changed after submit
+
+    // const allTodoTitles = container.querySelectorAll("#newTodo-title");
+
+    // const newTodoTitles = [...allTodoTitles].filter(title => {
+    //   let currVal = title.getAttribute("value");
+    //   console.log("currVal is", currVal);
+    //   return (currVal === "Test1 Edited");
+    // })
+
+    // console.log(allTodoTitles)
+  })
 
 
 })
