@@ -8,7 +8,7 @@ const TEST_TODOS = [
   {
     id: 2,
     title: "Test2",
-    description: "Test2 -priority1",
+    description: "Test2 - priority1",
     priority: 1,
   },
   {
@@ -19,4 +19,5 @@ const TEST_TODOS = [
   },
 ];
 
+export {TEST_TODOS};
 
