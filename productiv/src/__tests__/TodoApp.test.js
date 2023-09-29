@@ -54,12 +54,32 @@ describe("Test form functionality", function (){
     const textareaDescription = container.querySelector("#newTodo-description");
 
     expect(inputTitle.getAttribute("value")).toEqual("Test1");
-    expect(textareaDescription.innerHTML).toEqual("Test1 - priority2");
+    expect(textareaDescription).toHaveTextContent("Test1 - priority2");
   })
 
-  // test("Test if we can add a new Todo", function (){
+  test("Test if we can add a new Todo", function (){
+    const {container, queryByText, debug} = render(<TodoApp initialTodos={TEST_TODOS} />);
 
-  // })
+      // new todo doesn't exist yet
+    expect(queryByText("Test4 - priority2")).not.toBeInTheDocument();
+
+    const titleField = container.querySelector("#newTodo-title");
+    const descField = container.querySelector("#newTodo-description");
+    const priorityField = container.querySelector("#newTodo-priority");
+    const submitBtn = container.querySelector(".NewTodoForm-addBtn");
+
+    //fill out the form
+    fireEvent.change(titleField, {target: {value: "Test4"}})
+    fireEvent.change(descField, {target: {value: "Test4 - priority2"}});
+    fireEvent.change(priorityField, {target: {value: 2}});
+    fireEvent.click(submitBtn);
+
+    //new todo exists
+    expect(queryByText("Test4 - priority2")).toBeInTheDocument();
+
+    const allTodos = container.querySelectorAll(".Todo");
+    expect(allTodos.length).toEqual(5);
+  })
 
   // test("Test if we can edit an existing Todo", function (){
 
