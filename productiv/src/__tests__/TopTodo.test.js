@@ -33,6 +33,8 @@ test("Do we see a top todo change when priority list is different?", function ()
   expect(queryByText("Test1 - priority2")).toBeInTheDocument();
 })
 
+//TODO: This test may be covered with the App level test
+
 // test("Do we see a message with no todos, when list is empty", function (){
 //   const { container, debug, queryByText } = render(<TopTodo todos={[]} />);
 //   expect(queryByText("You have no todos.")).toBeInTheDocument();

@@ -2,39 +2,24 @@ import { fireEvent, render } from "@testing-library/react";
 import Todo from "../Todo";
 import {TEST_TODOS} from "../_testCommon";
 
+const todo = TEST_TODOS[0];
 
 //smoke test
 test("Does it crash?", function (){
-  const todo = TEST_TODOS[0];
   render(<Todo {...todo}/>)
 })
 
 //snapshot test
-// test("Making a snapshot", function (){
-//   const { container } = render(<TopTodo todos={TEST_TODOS} />);
-//   expect(container).toMatchSnapshot();
-// })
+test("Making a snapshot", function (){
+  const { container } = render(<Todo {...todo} />);
+  expect(container).toMatchSnapshot();
+})
 
 
-// // const nameInput = getByLabelText("Name:");
-// // const qtyInput = getByLabelText("Qty:");
-// // const submitBtn = queryByText("Add a new item!");
+//actual tests
+test("do we see a correct todo?", function (){
+  const { queryByText } = render(<Todo {...todo} />);
 
-// //actual tests
-// test("do we see a correct priority top todo?", function (){
-//   const { queryByText } = render(<TopTodo todos={TEST_TODOS} />);
-//   expect(queryByText("Test2 - priority1")).toBeInTheDocument();
-// })
-
-
-// test("Do we see a top todo change when priority list is different?", function (){
-//   let shorterTodos = [TEST_TODOS[0], TEST_TODOS[2]];
-//   const { container, debug, queryByText } = render(<TopTodo todos={shorterTodos} />);
-//   expect(queryByText("Test1 - priority2")).toBeInTheDocument();
-// })
-
-// test("Do we see a message with no todos, when list is empty", function (){
-//   let shorterTodos = [TEST_TODOS[0], TEST_TODOS[2]];
-//   const { container, debug, queryByText } = render(<TopTodo todos={[]} />);
-//   expect(queryByText("You have no todos.")).toBeInTheDocument();
-// })
+  expect(queryByText("Test1 - priority2")).toContainHTML("<small>Test1 - priority2</small>");
+  expect(queryByText("(priority: 2)")).toContainHTML("<small>(priority: 2)</small>");
+});
